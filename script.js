@@ -250,27 +250,29 @@ class App {
   // }
 
   _validInputs(type, ...inputs) {
+    let finiteBool = true;
     inputs.forEach((inp, i) => {
       if (!Number.isFinite(inp)) {
         alert(
           `${i === 0 ? 'Distance' : i === 1 ? 'Duration' : type === 'running' ? 'Cadence' : 'Elevation gain'} inputs have to be  numbers!`,
         );
-        return false;
+        finiteBool = false;
       }
     });
-    return true;
+    return finiteBool;
   }
 
   _allPositive(...inputs) {
+    let finiteBool = true;
     inputs.forEach((inp, i) => {
       if (inp <= 0) {
         alert(
           `${i === 0 ? 'Distance' : i === 1 ? 'Duration' : 'Cadence'} inputs have to be positive numbers!`,
         );
-        return false;
+        finiteBool = false;
       }
     });
-    return true;
+    return finiteBool;
   }
 
   _newWorkout(e) {
