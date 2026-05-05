@@ -1,28 +1,68 @@
-# mapty-enhanced
-JavaScript, OOP, DOM manipulation, event delegation, Local Storage, Leaflet, Geolocation API, CRUD operations, form validation, state synchronization
+# Mapty - Workout Mapping App
 
-<h2>Skills / Technologies demonstrated</h2>
-<ul>
-  <li>JavaScript (ES6+)</li>
-  <li>Object-Oriented Programming (OOP)</li>
-  <li>Class-based architecture</li>
-  <li>Inheritance and encapsulation</li>
-  <li>Private class fields</li>
-  <li>DOM manipulation</li>
-  <li>Event handling and event delegation</li>
-  <li>Form handling and validation</li>
-  <li>Client-side CRUD operations</li>
-  <li>State management</li>
-  <li>Local Storage persistence</li>
-  <li>Object reconstruction from stored JSON data</li>
-  <li>Dynamic UI rendering</li>
-  <li>Conditional rendering</li>
-  <li>Array methods (find, filter, map, forEach, toSorted)</li>
-  <li>Leaflet.js</li>
-  <li>Geolocation API</li>
-  <li>UI/UX improvements</li>
-  <li>Error handling and confirmation flows</li>
-</ul>
+現在地周辺の地図上に、ランニング・サイクリングの記録を登録できるワークアウト管理アプリです。  
+JavaScriptのオブジェクト指向プログラミングを学習するためのMaptyアプリをベースに、編集・削除・並び替え・LocalStorageからのインスタンス復元などの機能を自力で追加しました。
 
-<h2>Project description</h2>
-This project is an extended version of a workout tracking app built with JavaScript and Leaflet. I independently added editing, deleting, bulk deleting, and sorting functionality, while also rebuilding class instances from Local Storage to restore application behavior after reload. The project demonstrates OOP design, DOM manipulation, client-side state management, persistent storage handling, and UI/UX improvements through validation and confirmation messages.
+---
+
+## アプリ概要
+
+Maptyは、地図上でクリックした地点にワークアウト情報を登録できるアプリです。
+
+ユーザーは現在地を中心に表示された地図上で任意の場所をクリックし、ランニングまたはサイクリングの情報を入力できます。  
+登録したワークアウトは、地図上のマーカーとサイドバーのリストに表示されます。
+
+ブラウザのLocalStorageを利用しているため、ページを再読み込みしても登録したワークアウトが保持されます。
+
+---
+
+## 使用技術
+
+- HTML
+- CSS
+- JavaScript
+- Leaflet.js
+- Geolocation API
+- LocalStorage
+- オブジェクト指向プログラミング
+- DOM操作
+
+---
+
+## 主な機能
+
+### 基本機能
+
+- 現在地を取得して地図を表示
+- 地図上をクリックしてワークアウト登録フォームを表示
+- ランニング・サイクリングの記録を作成
+- 登録したワークアウトを地図上にマーカー表示
+- 登録したワークアウトをリスト表示
+- リストのワークアウトをクリックすると、該当する地図位置へ移動
+- LocalStorageによるデータ保存
+- ページ再読み込み後もワークアウトを復元
+
+### 自力で追加した機能
+
+- ワークアウト編集機能
+- ワークアウト単体削除機能
+- 全ワークアウト削除機能
+- ワークアウトの並び替え機能
+  - date
+  - distance
+  - duration
+- LocalStorageから取得したデータをRunning / Cyclingインスタンスとして復元
+- より実用的なエラーメッセージ・確認メッセージの追加
+- Escキーでフォームを閉じる操作
+
+---
+
+## 工夫した点
+
+### 1. LocalStorageのデータをクラスインスタンスとして復元
+
+LocalStorageに保存したデータは、再取得すると通常のオブジェクトになり、RunningクラスやCyclingクラスのメソッドを使えなくなります。
+
+そのため、LocalStorageから取得したデータをそのまま使うのではなく、typeを判定して `new Running()` または `new Cycling()` を使って再生成するようにしました。
+
+これにより、ページを再読み込みした後でも、ワークアウトのクリック処理や計算処理を正しく扱えるようにしています。
